@@ -208,7 +208,7 @@ com! -nargs=0 Path echo "Path: " . <SID>Path()
 " CTRL-_ in insert mode closes a bracket:
 imap <C-_> <C-r>=<SID>Close(0)<CR>
 imap <C-\>_ <C-r>=<SID>Close(0)<CR>
-imap <silent> ]]=<SID>Close(0)<CR>
+imap ]]=<SID>Close(0)<CR>
 imap <C-\>= <C-r>=<SID>Close(1)<CR>
 " suggestions for nicier keymappings welcome...
 "
