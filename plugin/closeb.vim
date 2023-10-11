@@ -146,15 +146,15 @@ fun! <SID>Close(closemode)
 	else
 		let mymatch = strpart(s:lasttag,1)
 		if a:closemode==1 && exists("b:closeb_makeclosemiddle")
-			exec "let mymatch_try = " . b:closeb_makeclosemiddle
+			exec "silent let mymatch_try = " . b:closeb_makeclosemiddle
 			if mymatch_try==''
-				exec "let mymatch = " . b:closeb_makeclosetag
+				exec "silent let mymatch = " . b:closeb_makeclosetag
 				" some redundancy, yes
 			else
 				let mymatch = mymatch_try
 			endif
 		else
-			exec "let mymatch = " . b:closeb_makeclosetag
+			exec "silent let mymatch = " . b:closeb_makeclosetag
 		endif
 		if b:closeb_nlmagic && s:lasttag_line != line('.') && getline(s:lasttag_line) =~ '^\s*' . b:closeb_openre . '\s*$'
 			let prependnl = (getline('.') =~ '^\s*$' ? '' : "\n")
@@ -173,9 +173,9 @@ fun! <SID>Callback()
 	if s:lasttag != '' && ! s:ignoreemptystack
 		return -1
 	endif
-	exec "let result = " . b:closeb_isopen
+	exec "silent let result = " . b:closeb_isopen
 	if result
-		exec "let mymatch = " . b:closeb_openname
+		exec "silent let mymatch = " . b:closeb_openname
 		if s:stack == ''
 			" Close() == mymatch, remember, also the line number:
 			let s:lasttag = s:separator . mymatch . s:lasttag
@@ -193,7 +193,7 @@ fun! <SID>Callback()
 			let s:stack = substitute(s:stack, '.\{-}' . s:separator, '', '' )
 		endif
 	else " !b:closeb_isopen(mymatch)
-		exec "let mymatch = " . b:closeb_closename
+		exec "silent let mymatch = " . b:closeb_closename
 		" echomsg "Pushing on stack: " . mymatch
 		let s:stack = mymatch . s:separator . s:stack
 	endif
